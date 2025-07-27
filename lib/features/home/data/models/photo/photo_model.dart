@@ -63,7 +63,6 @@ class Photo {
   factory Photo.fromJson(Map<String, dynamic> json) => _$PhotoFromJson(json);
   Map<String, dynamic> toJson() => _$PhotoToJson(this);
 
-  // Helper methods to get different image sizes
   String get originalImage => src.original;
   String get largeImage => src.large;
   String get mediumImage => src.medium;
@@ -72,16 +71,12 @@ class Photo {
   String get landscapeImage => src.landscape;
   String get tinyImage => src.tiny;
 
-  // Get aspect ratio
   double get aspectRatio {
     if (height > 0) {
       return width / height;
     }
     return 1.0;
   }
-
-  // Get display title (photographer name + alt text)
-  String get displayTitle => alt.isNotEmpty ? alt : 'Photo by $photographer';
 }
 
 @JsonSerializable()
@@ -108,7 +103,6 @@ class PhotosResponse {
   Map<String, dynamic> toJson() => _$PhotosResponseToJson(this);
 }
 
-// For search functionality
 @JsonSerializable()
 class SearchPhotosResponse {
   final int page;

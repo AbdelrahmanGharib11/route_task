@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:selfdep/core/widgets/show_connectivity.dart';
 import 'package:selfdep/core/widgets/toggleswitcher.dart';
+import 'package:selfdep/features/home/presentation/screen/masonry_grid.dart';
 import 'package:selfdep/features/home/presentation/screen/photos_layout.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -42,7 +43,8 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: 12),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: PhotosLayout(),
+                child: PhotoGridScreen(),
+                //PhotosLayout(),
               ),
             ],
           ),

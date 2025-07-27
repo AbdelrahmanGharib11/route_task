@@ -80,7 +80,6 @@ class _NetworkStatusWidgetState extends State<ShowConnectivity>
       connectionType = 'Offline';
     }
 
-    // Trigger animation on status change
     if (wasConnected != isConnected) {
       _animationController.forward().then((_) {
         _animationController.reverse();

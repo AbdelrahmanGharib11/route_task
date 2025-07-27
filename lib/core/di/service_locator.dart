@@ -11,6 +11,7 @@ import 'package:selfdep/features/home/domain/repository/photo_repository.dart';
 import 'package:selfdep/features/home/data/repository/photo_repository_impl.dart';
 import 'package:selfdep/features/home/domain/usecases/get_photos.dart';
 import 'package:selfdep/features/home/presentation/cubit/photo_cubit.dart';
+import 'package:selfdep/core/theme/theme_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -37,4 +38,6 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton(() => GetCuratedPhotos(sl()));
 
   sl.registerFactory(() => PhotoCubit(getCuratedPhotos: sl()));
+
+  sl.registerLazySingleton(() => ThemeCubit());
 }

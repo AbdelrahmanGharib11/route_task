@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:selfdep/core/di/service_locator.dart';
+import 'package:selfdep/core/theme/theme_cubit.dart';
 import 'package:selfdep/features/home/presentation/screen/home_page.dart';
-import 'package:selfdep/features/home/presentation/screen/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,13 +14,20 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-      routes: {'/photo': (context) => const HomeScreen()},
+    return BlocProvider(
+      create: (context) => sl<ThemeCubit>(),
+      child: BlocBuilder<ThemeCubit, ThemeData>(
+        builder: (context, theme) {
+          return MaterialApp(
+            title: 'Your App Name',
+            theme: theme,
+            home: const HomePage(),
+            debugShowCheckedModeBanner: false,
+          );
+        },
+      ),
     );
   }
 }

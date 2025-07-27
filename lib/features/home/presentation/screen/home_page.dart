@@ -6,6 +6,8 @@ import 'package:selfdep/core/cache/custom_cache_manager.dart';
 import 'package:selfdep/core/di/service_locator.dart';
 import 'package:selfdep/core/widgets/show_connectivity.dart';
 import 'package:selfdep/core/widgets/toggleswitcher.dart' hide Theme;
+import 'package:selfdep/core/widgets/Toggleswitcher.dart'
+    hide Theme, ToggleSwitcherr;
 import 'package:selfdep/features/home/domain/entities/photo_entity.dart';
 import 'package:selfdep/features/home/presentation/cubit/photo_cubit.dart';
 import 'package:selfdep/features/home/presentation/cubit/photo_states.dart';
@@ -153,7 +155,7 @@ class _HomeViewState extends State<HomeView> {
                                   padding: const EdgeInsets.all(12),
                                   child: Column(
                                     children: [
-                                      ToggleSwitcher(),
+                                      ToggleSwitcherr(),
                                       SizedBox(height: 8),
                                       ShowConnectivity(),
                                     ],
@@ -241,7 +243,7 @@ class _HomeViewState extends State<HomeView> {
                             padding: const EdgeInsets.all(12),
                             child: Column(
                               children: [
-                                ToggleSwitcher(),
+                                ToggleSwitcherr(),
                                 SizedBox(height: 8),
                                 ShowConnectivity(),
                               ],

@@ -299,52 +299,49 @@ class PhotoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => Navigator.pushNamed(context, '/photo', arguments: photo),
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CachedNetworkImage(
-              imageUrl: photo.src.medium,
-              cacheManager: CustomCacheManager(),
-              fit: BoxFit.cover,
-              placeholder: (context, url) => Shimmer.fromColors(
-                direction: ShimmerDirection.ttb,
-                baseColor: Colors.grey[400]!,
-                highlightColor: Colors.grey[300]!,
-                child: Container(height: 200, color: Colors.white),
-              ),
-              errorWidget: (context, url, error) => Container(
-                height: 200,
-                color: Colors.grey[300],
-                child: const Icon(Icons.error),
-              ),
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CachedNetworkImage(
+            imageUrl: photo.src.medium,
+            cacheManager: CustomCacheManager(),
+            fit: BoxFit.cover,
+            placeholder: (context, url) => Shimmer.fromColors(
+              direction: ShimmerDirection.ttb,
+              baseColor: Colors.grey[400]!,
+              highlightColor: Colors.grey[300]!,
+              child: Container(height: 200, color: Colors.white),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Column(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //       Text(
-            //         photo.alt.isNotEmpty ? photo.alt : 'Untitled',
-            //         style: Theme.of(context).textTheme.bodyMedium,
-            //         maxLines: 2,
-            //         overflow: TextOverflow.ellipsis,
-            //       ),
-            //       const SizedBox(height: 4),
-            //       Text(
-            //         'by ${photo.photographer}',
-            //         style: Theme.of(
-            //           context,
-            //         ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
-            //       ),
-            //     ],
-            //   ),
-            //),
-          ],
-        ),
+            errorWidget: (context, url, error) => Container(
+              height: 200,
+              color: Colors.grey[300],
+              child: const Icon(Icons.error),
+            ),
+          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       Text(
+          //         photo.alt.isNotEmpty ? photo.alt : 'Untitled',
+          //         style: Theme.of(context).textTheme.bodyMedium,
+          //         maxLines: 2,
+          //         overflow: TextOverflow.ellipsis,
+          //       ),
+          //       const SizedBox(height: 4),
+          //       Text(
+          //         'by ${photo.photographer}',
+          //         style: Theme.of(
+          //           context,
+          //         ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+          //       ),
+          //     ],
+          //   ),
+          //),
+        ],
       ),
     );
   }

@@ -87,6 +87,62 @@ lib/
 
 ---
 
+## 🔧 Dependency Injection Strategy
+
+### Why Manual GetIt Over Injectable?
+
+This project uses **manual dependency registration** with `GetIt` instead of the `injectable` package for several strategic reasons:
+
+#### 🎯 **Technical Challenges**
+- **Build Runner Issues**: `injectable` requires `build_runner` for code generation, which failed multiple times during development
+- **Complex Initialization**: Hive setup with type adapters requires specific initialization order that's easier to control manually
+- **Async Dependencies**: Custom `DioClient` configuration and Hive initialization need careful sequencing
+
+#### ✅ **Benefits of Manual Approach**
+
+| Aspect | Manual GetIt | Injectable |
+|--------|-------------|------------|
+| **Build Reliability** | ✅ No code generation | ❌ Depends on build_runner |
+| **Initialization Control** | ✅ Full control over order | ❌ Limited flexibility |
+| **Debugging** | ✅ Clear registration flow | ❌ Generated code complexity |
+| **Setup Complexity** | ✅ Straightforward | ❌ Requires annotations + generation |
+| **Hive Integration** | ✅ Easy async setup | ❌ Requires workarounds |
+
+#### 🏗️ **Our Implementation**
+
+```dart
+Future<void> initializeDependencies() async {
+  // 1. Initialize Hive with proper sequencing
+  await Hive.initFlutter();
+  Hive.registerAdapter(PhotoHiveModelAdapter());
+  Hive.registerAdapter(PhotoSrcHiveModelAdapter());
+
+  // 2. Configure network layer
+  final dioClient = DioClient();
+  sl.registerLazySingleton<Dio>(() => dioClient.dio);
+
+  // 3. Register data sources with explicit dependencies
+  sl.registerLazySingleton<PhotoRemoteDataSource>(
+    () => PhotoRemoteDataSourceImpl(sl()),
+  );
+
+  // 4. Clean dependency chain
+  sl.registerFactory(() => PhotoCubit(getCuratedPhotos: sl()));
+}
+```
+
+#### 🚀 **Why This Works Better**
+
+- **No Build Failures**: Eliminates `build_runner` dependency issues
+- **Explicit Dependencies**: Clear visibility of what depends on what
+- **Easy Testing**: Simple to mock dependencies without generated code
+- **Maintainable**: Easy to modify registration logic
+- **Performance**: No reflection or code generation overhead
+
+This approach provides the same dependency injection benefits as `injectable` while maintaining full control over the initialization process and avoiding build-time complications.
+
+---
+
 ### 🛠️ Setup Instructions
 
 1. **Clone the repository**

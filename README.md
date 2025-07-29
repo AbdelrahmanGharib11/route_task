@@ -34,7 +34,7 @@ This app follows **Clean Architecture**:
 lib/
 ├── core/                           # Shared logic, utilities, and widgets
 │   ├── cache/                      # Custom cache manager
-│   ├── di/                         # Dependency injection setup
+│   ├── di/                         # Dependency injection setup using GetIt
 │   ├── network/                    # API configuration and error handling
 │   ├── theme/                      # Theme management with Cubit
 │   └── widgets/                    # Reusable UI components
